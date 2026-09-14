@@ -30,8 +30,7 @@ init_db()
 
 @app.route('/add_item', methods=['POST'])
 def add_item():
-    # 这里加 force=True 和 silent=True 是为了防止请求格式错误导致崩溃
-    data = request.get_json(force=True, silent=True) or request.json
+    data = request.json
     required = ['name', 'feature', 'location', 'contact']
     
     for field in required:
