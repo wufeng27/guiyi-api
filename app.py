@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 import sqlite3
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 DB_PATH = 'lost_found.db'
 
 def init_db():
@@ -26,7 +27,7 @@ def init_db():
 @app.route('/add_item', methods=['POST'])
 def add_item():
     """拾主上交，写入数据库"""
-    data = request.json
+   data = request.get_json(force=True, silent=True) or request.json
     required = ['name', 'feature', 'location', 'contact']
     for field in required:
         if field not in data or not data[field]:
