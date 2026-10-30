@@ -4,6 +4,7 @@ import sqlite3
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
+app.json.ensure_ascii = False
 app.config['JSON_AS_ASCII'] = False
 
 DB_PATH = '/tmp/lost_found.db' if os.environ.get('PORT') else 'lost_found.db'
